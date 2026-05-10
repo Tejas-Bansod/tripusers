@@ -89,6 +89,7 @@ export function HeroSection() {
   const [selectedMonth, setSelectedMonth] = React.useState<string | null>(null)
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
+  const videoRefs = React.useRef<(HTMLVideoElement | null)[]>([])
 
   const plugins = React.useMemo(() => [
     Autoplay({ delay: 8000, stopOnInteraction: false, stopOnMouseEnter: false })
@@ -102,37 +103,61 @@ export function HeroSection() {
     })
   }, [api])
 
+  // Video control: Play active video from start, pause others
+  React.useEffect(() => {
+    videoRefs.current.forEach((video, index) => {
+      if (video) {
+        if (index === current) {
+          video.currentTime = 0
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
+      }
+    })
+  }, [current])
+
   const months2026 = ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   const months2027 = ["Jan", "Feb", "Mar", "Apr"]
 
   return (
-    <section className="relative w-full h-screen md:h-[550px] lg:h-[650px] overflow-hidden group">
-      {/* Background Carousel */}
+    <section className="relative w-full h-screen md:h-[550px] lg:h-[650px] overflow-hidden group bg-black">
+      {/* Background Cross-Fade Layers */}
+      <div className="absolute inset-0 z-0">
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={cn(
+              "absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out",
+              current === index ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-110 blur-2xl"
+            )}
+          >
+            <video
+              ref={(el) => { videoRefs.current[index] = el }}
+              muted
+              loop
+              playsInline
+              poster={slide.poster}
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src={slide.video} type="video/mp4" />
+            </video>
+            <div className={cn("absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80", slide.color)} />
+          </div>
+        ))}
+      </div>
+
       <Carousel
         setApi={setApi}
         plugins={plugins}
-        className="w-full h-full"
+        className="w-full h-full relative z-10"
         opts={{
           loop: true,
         }}
       >
-        <CarouselContent className="h-full ml-0 ">
+        <CarouselContent className="h-full ml-0">
           {slides.map((slide, index) => (
             <CarouselItem key={index} className="relative h-full pl-0">
-              <div className="absolute inset-0 w-full h-full overflow-hidden">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster={slide.poster}
-                  className="absolute inset-0 w-full h-full object-cover"
-                >
-                  <source src={slide.video} type="video/mp4" />
-                </video>
-                <div className={cn("absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70", slide.color)} />
-              </div>
-
               {/* Slide Content */}
               <div className="relative h-full w-full px-4 md:px-12 flex flex-col items-center justify-start pt-16 md:justify-center text-center text-white pb-0 md:pb-115">
                 <div className="max-w-5xl w-full space-y-4 md:space-y-6 animate-in fade-in slide-in-from-bottom-10 duration-1000">
