@@ -121,7 +121,7 @@ export function HeroSection() {
   const months2027 = ["Jan", "Feb", "Mar", "Apr"]
 
   return (
-    <section className="relative w-full h-screen md:h-[550px] lg:h-[650px] overflow-hidden group bg-black">
+    <section className="relative z-10 w-full h-screen md:h-[550px] lg:h-[650px] overflow-hidden group bg-black">
       {/* Background Cross-Fade Layers */}
       <div className="absolute inset-0 z-0">
         {slides.map((slide, index) => (
@@ -206,8 +206,8 @@ export function HeroSection() {
       </Carousel>
 
       {/* Overlaid UI Container */}
-      <div className="absolute inset-x-0 bottom-0 pb-6 md:pb-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent pt-20">
-        <div className="container mx-auto px-4 md:px-0 space-y-6 md:space-y-8">
+      <div className="absolute z-20 inset-x-0 bottom-0 pb-6 md:pb-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent pt-20 pointer-events-none">
+        <div className="container mx-auto px-4 md:px-0 space-y-6 md:space-y-8 pointer-events-auto">
 
           {/* Search Bar - Premium Glassmorphism */}
           <div className="bg-white/95 backdrop-blur-2xl rounded-2xl md:rounded-full p-2 md:p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-center gap-2 max-w-4xl mx-auto border border-white transition-all duration-500">
