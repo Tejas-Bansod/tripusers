@@ -564,11 +564,11 @@ export function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link href="/contact-us" legacyBehavior passHref>
-                  <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-white text-slate-700 hover:text-red-600 h-9 text-xs uppercase tracking-widest font-black transition-colors")}>
+                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-white text-slate-700 hover:text-red-600 h-9 text-xs uppercase tracking-widest font-black transition-colors")}>
+                  <Link href="/contact-us">
                     Support
-                  </NavigationMenuLink>
-                </Link>
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
 
             </NavigationMenuList>
