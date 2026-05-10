@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
 import { MapPin, Calendar, Search, ChevronRight } from "lucide-react"
 import Autoplay from "embla-carousel-autoplay"
 
@@ -24,7 +23,8 @@ import { cn } from "@/lib/utils"
 
 const slides = [
   {
-    image: "https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    video: "https://videos.pexels.com/video-files/32390619/13816698_1920_1080_60fps.mp4",
+    poster: "https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     title: "Welcome to Tripusers!",
     subtitle: "Experience luxury redefined. Your journey of a thousand miles begins with a single step.",
     price: "From ₹70,000",
@@ -32,7 +32,8 @@ const slides = [
     color: "from-blue-900/40",
   },
   {
-    image: "https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    video: "https://videos.pexels.com/video-files/32504550/13860782_2560_1440_60fps.mp4",
+    poster: "https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     title: "Adventure Awaits with Tripusers!",
     subtitle: "From the peaks of the Himalayas to the depths of the Pacific, discover the unknown.",
     price: "Starting at ₹60,000",
@@ -40,12 +41,40 @@ const slides = [
     color: "from-emerald-900/40",
   },
   {
-    image: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    video: "https://videos.pexels.com/video-files/35274172/14943113_1920_1080_25fps.mp4",
+    poster: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     title: "Cultural Wonders by Tripusers!",
     subtitle: "Immerse yourself in history. Walk the streets of ancient civilizations and taste the world.",
     price: "Packages from ₹80,000",
     tagline: "Deep Cultural Immersion",
     color: "from-amber-900/40",
+  },
+  {
+    video: "https://videos.pexels.com/video-files/11272960/11272960-uhd_2560_1440_50fps.mp4",
+    poster: "https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    title: "Arctic Serenity with Tripusers!",
+    subtitle: "Witness the majestic aurora and pristine snowscapes of the northern frontiers.",
+    price: "Packages from ₹95,000",
+    tagline: "Exclusive Arctic Expeditions",
+    color: "from-indigo-900/40",
+  },
+  {
+    video: "https://videos.pexels.com/video-files/19376557/19376557-uhd_2560_1440_25fps.mp4",
+    poster: "https://images.pexels.com/photos/2101137/pexels-photo-2101137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    title: "Desert Mystique by Tripusers!",
+    subtitle: "Traverse the golden dunes and sleep under a billion stars in our luxury desert camps.",
+    price: "Starting at ₹55,000",
+    tagline: "Luxury Desert Safaris",
+    color: "from-orange-900/40",
+  },
+  {
+    video: "https://videos.pexels.com/video-files/34287509/14526470_2560_1440_25fps.mp4",
+    poster: "https://images.pexels.com/photos/1519088/pexels-photo-1519088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    title: "Urban Skyline Tours by Tripusers!",
+    subtitle: "Experience the pulse of the world's greatest metropolises in unparalleled style.",
+    price: "Deals from ₹45,000",
+    tagline: "Premium City Breaks",
+    color: "from-purple-900/40",
   },
 ]
 
@@ -62,7 +91,7 @@ export function HeroSection() {
   const [current, setCurrent] = React.useState(0)
 
   const plugins = React.useMemo(() => [
-    Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true })
+    Autoplay({ delay: 8000, stopOnInteraction: false, stopOnMouseEnter: false })
   ], [])
 
   React.useEffect(() => {
@@ -90,14 +119,17 @@ export function HeroSection() {
         <CarouselContent className="h-full ml-0 ">
           {slides.map((slide, index) => (
             <CarouselItem key={index} className="relative h-full pl-0">
-              <div className="absolute inset-0 w-full">
-                <Image
-                  src={slide.image}
-                  alt={slide.title}
-                  fill
-                  className="object-cover w-full h-full"
-                  priority={index === 0}
-                />
+              <div className="absolute inset-0 w-full h-full overflow-hidden">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={slide.poster}
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source src={slide.video} type="video/mp4" />
+                </video>
                 <div className={cn("absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70", slide.color)} />
               </div>
 
