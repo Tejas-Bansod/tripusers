@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 };
 
 import { Header } from "@/app/components/header";
+import { MobileNav } from "@/app/components/mobile-nav";
 
 export default function RootLayout({
   children,
@@ -32,11 +33,12 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col pb-16 md:pb-0">
         <Header />
         <main className="flex-1">
           {children}
         </main>
+        <MobileNav />
       </body>
     </html>
   );
