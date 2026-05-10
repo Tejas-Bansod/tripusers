@@ -161,87 +161,106 @@ export function Header() {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="bg-white text-slate-900 border-r border-slate-100 overflow-y-auto">
-              <SheetHeader className="mb-6">
-                <SheetTitle className="text-slate-900 text-left font-black flex items-center gap-2">
-                  <Compass className="h-6 w-6 text-red-600" />
-                  Tripusers Navigation
-                </SheetTitle>
-              </SheetHeader>
-              
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="domestic">
-                  <AccordionTrigger className="text-lg font-bold hover:text-red-600">Domestic Trips</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-col gap-2 pl-4 border-l-2 border-red-50 ml-1">
-                      {domesticCollections.map(c => (
-                        <div key={c.title} className="mb-2">
-                          <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{c.title}</p>
-                          {c.items.map(item => (
-                            <Link key={item} href="#" className="block py-1 text-sm font-bold text-slate-600 hover:text-red-600" onClick={() => setIsOpen(false)}>{item}</Link>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="international">
-                  <AccordionTrigger className="text-lg font-bold hover:text-red-600">International</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-col gap-2 pl-4 border-l-2 border-yellow-400 ml-1">
-                      {internationalCollections.map(c => (
-                        <div key={c.title} className="mb-2">
-                          <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{c.title}</p>
-                          {c.items.map(item => (
-                            <Link key={item} href="#" className="block py-1 text-sm font-bold text-slate-600 hover:text-red-600" onClick={() => setIsOpen(false)}>{item}</Link>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="speciality">
-                  <AccordionTrigger className="text-lg font-bold hover:text-red-600">Speciality Tours</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-col gap-2 pl-4 border-l-2 border-red-500 ml-1">
-                      {specialityTours.map(c => (
-                        <div key={c.title} className="mb-2">
-                          <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{c.title}</p>
-                          {c.items.map(item => (
-                            <Link key={item} href="#" className="block py-1 text-sm font-bold text-slate-600 hover:text-red-600" onClick={() => setIsOpen(false)}>{item}</Link>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="services">
-                  <AccordionTrigger className="text-lg font-bold hover:text-red-600">Travel Services</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="grid grid-cols-1 gap-2 pl-4">
-                      {servicesData.map(s => (
-                        <Link key={s.title} href="#" className="flex items-center gap-2 py-2 text-sm font-bold text-slate-700" onClick={() => setIsOpen(false)}>
-                          {s.icon} {s.title}
-                        </Link>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-
-              <div className="mt-8 pt-8 border-t border-slate-100">
-                <Link href="/login" className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl mb-4" onClick={() => setIsOpen(false)}>
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-slate-200">
-                    <User className="h-5 w-5 text-red-600" />
+            <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-white text-slate-900 border-r border-slate-100 overflow-y-auto p-0">
+              <div className="p-6">
+                <SheetHeader className="mb-8 flex flex-row items-center justify-between">
+                  <div className="relative h-10 w-32">
+                    <Image
+                      src="/logo.png"
+                      alt="Tripusers Logo"
+                      fill
+                      className="object-contain object-left"
+                    />
                   </div>
-                  <div>
-                    <p className="text-sm font-black text-slate-900">Sign In</p>
-                    <p className="text-xs text-slate-500">Access your bookings</p>
+                </SheetHeader>
+                
+                <div className="space-y-6">
+                  <div className="space-y-1">
+                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Menu</h3>
+                    
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="domestic" className="border-b-slate-50">
+                        <AccordionTrigger className="text-sm font-black text-slate-900 hover:text-red-600 py-4 uppercase tracking-wider">Domestic Trips</AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col gap-4 py-2">
+                            {domesticCollections.map(c => (
+                              <div key={c.title} className="space-y-2">
+                                <p className="text-[10px] font-black text-red-600 uppercase tracking-[0.2em]">{c.title}</p>
+                                <div className="grid grid-cols-1 gap-1">
+                                  {c.items.map(item => (
+                                    <Link key={item} href="#" className="py-1 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors" onClick={() => setIsOpen(false)}>{item}</Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="international" className="border-b-slate-50">
+                        <AccordionTrigger className="text-sm font-black text-slate-900 hover:text-red-600 py-4 uppercase tracking-wider">International</AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col gap-4 py-2">
+                            {internationalCollections.map(c => (
+                              <div key={c.title} className="space-y-2">
+                                <p className="text-[10px] font-black text-yellow-500 uppercase tracking-[0.2em]">{c.title}</p>
+                                <div className="grid grid-cols-1 gap-1">
+                                  {c.items.map(item => (
+                                    <Link key={item} href="#" className="py-1 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors" onClick={() => setIsOpen(false)}>{item}</Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="speciality" className="border-b-slate-50">
+                        <AccordionTrigger className="text-sm font-black text-slate-900 hover:text-red-600 py-4 uppercase tracking-wider">Speciality Tours</AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col gap-4 py-2">
+                            {specialityTours.map(c => (
+                              <div key={c.title} className="space-y-2">
+                                <p className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">{c.title}</p>
+                                <div className="grid grid-cols-1 gap-1">
+                                  {c.items.map(item => (
+                                    <Link key={item} href="#" className="py-1 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors" onClick={() => setIsOpen(false)}>{item}</Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="services" className="border-b-0">
+                        <AccordionTrigger className="text-sm font-black text-slate-900 hover:text-red-600 py-4 uppercase tracking-wider">Travel Services</AccordionTrigger>
+                        <AccordionContent>
+                          <div className="grid grid-cols-1 gap-1 py-2">
+                            {servicesData.map(s => (
+                              <Link key={s.title} href="#" className="flex items-center gap-3 py-2 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors" onClick={() => setIsOpen(false)}>
+                                <div className="p-1.5 bg-slate-50 rounded-lg text-red-600">{s.icon}</div>
+                                {s.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
                   </div>
-                </Link>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-slate-50">
+                  <Link href="/login" className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl hover:bg-red-50 transition-all group" onClick={() => setIsOpen(false)}>
+                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-slate-200 group-hover:border-red-200 transition-colors">
+                      <User className="h-5 w-5 text-red-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-black text-slate-900">Sign In</p>
+                      <p className="text-[10px] font-bold text-slate-500">Access your bookings</p>
+                    </div>
+                  </Link>
+                </div>
               </div>
             </SheetContent>
           </Sheet>

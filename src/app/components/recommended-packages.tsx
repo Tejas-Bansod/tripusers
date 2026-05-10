@@ -40,8 +40,8 @@ function RollingStat({ label, sequence }: { label: string, sequence: string[] })
   }, [sequence.length])
 
   return (
-    <div className="flex items-center gap-6 group">
-      <div className="h-10 md:h-14 overflow-hidden relative min-w-[3.5em] md:min-w-[4.5em] flex items-center">
+    <div className="flex items-center gap-3 md:gap-6 group">
+      <div className="h-8 md:h-14 overflow-hidden relative min-w-[3em] md:min-w-[4.5em] flex items-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -52,13 +52,13 @@ function RollingStat({ label, sequence }: { label: string, sequence: string[] })
               duration: 0.6, 
               ease: [0.23, 1, 0.32, 1] // Custom quintic ease-out
             }}
-            className="text-3xl md:text-5xl font-black text-red-600 tracking-tighter"
+            className="text-xl sm:text-2xl md:text-5xl font-black text-red-600 tracking-tighter"
           >
             {sequence[index]}
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="text-sm md:text-[15px] font-bold text-slate-500 uppercase tracking-widest leading-none">
+      <div className="text-[10px] sm:text-xs md:text-[15px] font-black text-slate-900 uppercase tracking-widest leading-tight max-w-[120px] md:max-w-none">
         {label}
       </div>
     </div>
@@ -107,7 +107,7 @@ export function RecommendedPackages() {
           {/* Left Stats Column */}
           <div className="lg:col-span-4 space-y-10 text-center lg:text-left">
             <h2 className="text-3xl md:text-5xl font-black text-slate-800 leading-tight">
-              Recommended <br className="hidden lg:block" /> Packages
+              Recommended <br className="hidden md:block" /> Packages
             </h2>
             
             <div className="space-y-6 md:space-y-8 flex flex-col items-center lg:items-start">
